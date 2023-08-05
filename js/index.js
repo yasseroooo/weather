@@ -9,56 +9,56 @@ var humidty = document.querySelector("#humidty")
 var wind = document.querySelector("#wind")
 var compass = document.querySelector("#compass")
 var search = document.querySelector("#searchBar")
-var find= document.querySelector("#button-addon2")
+var find = document.querySelector("#button-addon2")
 var date = ""
 var day = ""
 var currentCity = "Cairo"
 
-find.addEventListener("click", function(){
-    search.value=""
+find.addEventListener("click", function () {
+    search.value = ""
 })
 
 
 
-function cityname(currentCity){
-//API configration >>
-//==========================================
-// 1-instance from XmlHttpRequiest object
-var httpRequest = new XMLHttpRequest();
-var url = `http://api.weatherapi.com/v1/forecast.json?key=5d8946dbe351427cb4c82345230408&q=${currentCity}&days=3&aqi=n
+function cityname(currentCity) {
+    //API configration >>
+    //==========================================
+    // 1-instance from XmlHttpRequiest object
+    var httpRequest = new XMLHttpRequest();
+    var url = `https://api.weatherapi.com/v1/forecast.json?key=5d8946dbe351427cb4c82345230408&q=${currentCity}&days=3&aqi=n
 o&alerts=no`
-// 2- stablish connection
-httpRequest.open("GET", url)
+    // 2- stablish connection
+    httpRequest.open("GET", url)
 
-// 3- send Request 
-httpRequest.send()
-
-
-// 4- شوف حالة الريكويست 
-var response = [];
-response = "";
-httpRequest.addEventListener("readystatechange", function () {
-
-    if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-
-        response = JSON.parse(httpRequest.responseText);
+    // 3- send Request 
+    httpRequest.send()
 
 
-        // Access the object within the response
-        var nestedproperty = response.current.temp_c
-        var nestedLocation = response.location.name;
-        var nestedImg = response.current.condition.icon;
-        var nestedpartly = response.current.condition.text;
-        var nestedhumidity = response.current.humidity;
-        var nestedwind_kph = response.current.wind_kph;
-        var nestedwind_dir = response.current.wind_dir;
-        var nestedDate = response.forecast.forecastday[0].date
-        date = nestedDate
-        // // Return all keys of the nested object
-        // var keys = Object.keys(nestedDate);
-        var crtoona = ""
+    // 4- شوف حالة الريكويست 
+    var response = [];
+    response = "";
+    httpRequest.addEventListener("readystatechange", function () {
 
-        crtoona = `
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+
+            response = JSON.parse(httpRequest.responseText);
+
+
+            // Access the object within the response
+            var nestedproperty = response.current.temp_c
+            var nestedLocation = response.location.name;
+            var nestedImg = response.current.condition.icon;
+            var nestedpartly = response.current.condition.text;
+            var nestedhumidity = response.current.humidity;
+            var nestedwind_kph = response.current.wind_kph;
+            var nestedwind_dir = response.current.wind_dir;
+            var nestedDate = response.forecast.forecastday[0].date
+            date = nestedDate
+            // // Return all keys of the nested object
+            // var keys = Object.keys(nestedDate);
+            var crtoona = ""
+
+            crtoona = `
         <!-- Today's Card -->
                     <div class=" temp-card shadow p-0 col-lg-3 text-bg-secondary">
                     <div class="day-and-date bg-body px-4 pt-3 d-flex justify-content-between  text-bg-light">
@@ -137,11 +137,11 @@ httpRequest.addEventListener("readystatechange", function () {
                     </div>
                        
         `
-        document.querySelector(".cartona").innerHTML = crtoona;
+            document.querySelector(".cartona").innerHTML = crtoona;
 
 
-    }
-});
+        }
+    });
 }
 
 
@@ -161,17 +161,17 @@ day = dayName;
 
 
 
-searchBar.addEventListener("keyup",function(){
+searchBar.addEventListener("keyup", function () {
 
-    city = searchBar.value 
+    city = searchBar.value
     console.log(city)
-    currentCity=city;
-   cityname(city)
-   
-   })
+    currentCity = city;
+    cityname(city)
+
+})
 
 cityname(currentCity)
 
 
 
-  
+
